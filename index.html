@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clickable Ad Grid</title>
+    <title>Geo-Targeted Ad Grid</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -11,97 +11,104 @@
             border: 1px solid #dee2e6;
             border-radius: .25rem;
             margin-bottom: 1.5rem;
-            overflow: hidden; /* Ensures the image fits inside the card */
-        }
-        .ad-card a {
-            display: block; /* Makes the entire area clickable */
-            text-decoration: none;
+            overflow: hidden;
+            cursor: pointer; /* ताकी यह क्लिक करने योग्य लगे */
         }
         .ad-card img {
-            width: 100%; /* Makes the placeholder image responsive */
+            width: 100%;
             height: auto;
-            display: block; /* Removes any extra space below the image */
+            display: block;
         }
     </style>
 </head>
 <body>
 
 <div class="container mt-5">
-    <h1 class="text-center mb-4">विज्ञापन (2x4 ग्रिड)</h1>
-    <p class="text-center text-muted">किसी भी विज्ञापन पर क्लिक करने पर वह एक नए टैब में खुलेगा।</p>
+    <h1 class="text-center mb-4">विज्ञापन (सभी देशों के लिए)</h1>
+    <p class="text-center text-muted">ये विज्ञापन आपके देश के अनुसार खुलेंगे।</p>
 
     <!-- Row 1 -->
     <div class="row">
-        <!-- Ad 1 -->
         <div class="col-lg-3 col-md-6">
-            <div class="ad-card">
-                <a href="https://shorturl.at/W1dCs" target="_blank" rel="noopener noreferrer">
-                    <img src="https://placehold.co/300x250/343A40/FFFFFF?text=Ad+Slot+1" alt="Advertisement 1">
-                </a>
+            <div class="ad-card" onclick="redirectToAd()">
+                <img src="https://placehold.co/300x250/007BFF/FFFFFF?text=Ad+Slot+1" alt="Advertisement">
             </div>
         </div>
-        <!-- Ad 2 -->
         <div class="col-lg-3 col-md-6">
-            <div class="ad-card">
-                <a href="https://shorturl.at/W1dCs" target="_blank" rel="noopener noreferrer">
-                    <img src="https://placehold.co/300x250/343A40/FFFFFF?text=Ad+Slot+2" alt="Advertisement 2">
-                </a>
+            <div class="ad-card" onclick="redirectToAd()">
+                <img src="https://placehold.co/300x250/007BFF/FFFFFF?text=Ad+Slot+2" alt="Advertisement">
             </div>
         </div>
-        <!-- Ad 3 -->
         <div class="col-lg-3 col-md-6">
-            <div class="ad-card">
-                <a href="https://shorturl.at/W1dCs" target="_blank" rel="noopener noreferrer">
-                    <img src="https://placehold.co/300x250/343A40/FFFFFF?text=Ad+Slot+3" alt="Advertisement 3">
-                </a>
+            <div class="ad-card" onclick="redirectToAd()">
+                <img src="https://placehold.co/300x250/007BFF/FFFFFF?text=Ad+Slot+3" alt="Advertisement">
             </div>
         </div>
-        <!-- Ad 4 -->
         <div class="col-lg-3 col-md-6">
-            <div class="ad-card">
-                <a href="https://shorturl.at/W1dCs" target="_blank" rel="noopener noreferrer">
-                    <img src="https://placehold.co/300x250/343A40/FFFFFF?text=Ad+Slot+4" alt="Advertisement 4">
-                </a>
+            <div class="ad-card" onclick="redirectToAd()">
+                <img src="https://placehold.co/300x250/007BFF/FFFFFF?text=Ad+Slot+4" alt="Advertisement">
             </div>
         </div>
     </div>
 
     <!-- Row 2 -->
     <div class="row">
-        <!-- Ad 5 -->
         <div class="col-lg-3 col-md-6">
-            <div class="ad-card">
-                <a href="https://shorturl.at/W1dCs" target="_blank" rel="noopener noreferrer">
-                    <img src="https://placehold.co/300x250/343A40/FFFFFF?text=Ad+Slot+5" alt="Advertisement 5">
-                </a>
+            <div class="ad-card" onclick="redirectToAd()">
+                <img src="https://placehold.co/300x250/007BFF/FFFFFF?text=Ad+Slot+5" alt="Advertisement">
             </div>
         </div>
-        <!-- Ad 6 -->
         <div class="col-lg-3 col-md-6">
-            <div class="ad-card">
-                <a href="https://shorturl.at/W1dCs" target="_blank" rel="noopener noreferrer">
-                    <img src="https://placehold.co/300x250/343A40/FFFFFF?text=Ad+Slot+6" alt="Advertisement 6">
-                </a>
+            <div class="ad-card" onclick="redirectToAd()">
+                <img src="https://placehold.co/300x250/007BFF/FFFFFF?text=Ad+Slot+6" alt="Advertisement">
             </div>
         </div>
-        <!-- Ad 7 -->
         <div class="col-lg-3 col-md-6">
-            <div class="ad-card">
-                <a href="https://shorturl.at/W1dCs" target="_blank" rel="noopener noreferrer">
-                    <img src="https://placehold.co/300x250/343A40/FFFFFF?text=Ad+Slot+7" alt="Advertisement 7">
-                </a>
+            <div class="ad-card" onclick="redirectToAd()">
+                <img src="https://placehold.co/300x250/007BFF/FFFFFF?text=Ad+Slot+7" alt="Advertisement">
             </div>
         </div>
-        <!-- Ad 8 -->
         <div class="col-lg-3 col-md-6">
-            <div class="ad-card">
-                <a href="https://shorturl.at/W1dCs" target="_blank" rel="noopener noreferrer">
-                    <img src="https://placehold.co/300x250/343A40/FFFFFF?text=Ad+Slot+8" alt="Advertisement 8">
-                </a>
+            <div class="ad-card" onclick="redirectToAd()">
+                <img src="https://placehold.co/300x250/007BFF/FFFFFF?text=Ad+Slot+8" alt="Advertisement">
             </div>
         </div>
     </div>
 </div>
+
+<!-- JavaScript to handle Geo-Targeting -->
+<script>
+    // Step 1: यहाँ अपने देश-विशिष्ट विज्ञापन लिंक्स डालें
+    const adUrls = {
+        'US': 'https://link-for-usa-users.com',          // USA के लिए लिंक
+        'IN': 'https://link-for-india-users.com',        // भारत के लिए लिंक
+        'GB': 'https://link-for-uk-users.com',           // यूनाइटेड किंगडम के लिए लिंक
+        'CA': 'https://link-for-canada-users.com',       // कनाडा के लिए लिंक
+        // आप और भी देशों के कोड और लिंक यहाँ जोड़ सकते हैं...
+        'default': 'https://shorturl.at/W1dCs'  // अगर ऊपर कोई देश मैच नहीं होता, तो यह डिफ़ॉल्ट लिंक खुलेगा
+    };
+
+    // यह फ़ंक्शन उपयोगकर्ता को सही विज्ञापन पर रीडायरेक्ट करेगा
+    async function redirectToAd() {
+        try {
+            // हम एक मुफ्त API का उपयोग करके उपयोगकर्ता का देश पता कर रहे हैं
+            const response = await fetch('https://ip-api.com/json/?fields=countryCode');
+            const data = await response.json();
+            const countryCode = data.countryCode; // जैसे 'US', 'IN', 'GB'
+
+            // तय करें कि कौन सा URL उपयोग करना है
+            const finalUrl = adUrls[countryCode] || adUrls['default'];
+
+            // विज्ञापन को एक नए टैब में खोलें
+            window.open(finalUrl, '_blank');
+            
+        } catch (error) {
+            console.error('Could not fetch country info, redirecting to default ad:', error);
+            // अगर कोई एरर आता है, तो भी डिफ़ॉल्ट विज्ञापन खोलें
+            window.open(adUrls['default'], '_blank');
+        }
+    }
+</script>
 
 <!-- Bootstrap JS Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
