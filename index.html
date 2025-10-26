@@ -3,80 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geo-Targeted Ad Grid</title>
+    <title>Auto-Display Geo-Targeted Ads</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .ad-card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 250px; /* विज्ञापन के लोड होने तक एक निश्चित ऊंचाई */
             border: 1px solid #dee2e6;
             border-radius: .25rem;
             margin-bottom: 1.5rem;
             overflow: hidden;
-            cursor: pointer; /* ताकी यह क्लिक करने योग्य लगे */
+            background-color: #f8f9fa; /* लोडिंग के दौरान बैकग्राउंड कलर */
         }
-        .ad-card img {
-            width: 100%;
-            height: auto;
-            display: block;
+        .ad-card iframe {
+            border: none; /* iframe का बॉर्डर हटा दें */
         }
     </style>
 </head>
 <body>
 
 <div class="container mt-5">
-    <h1 class="text-center mb-4">विज्ञापन (सभी देशों के लिए)</h1>
-    <p class="text-center text-muted">ये विज्ञापन आपके देश के अनुसार खुलेंगे।</p>
+    <h1 class="text-center mb-4">विज्ञापन (स्वचालित प्रदर्शन)</h1>
+    <p class="text-center text-muted">ये विज्ञापन आपके देश के अनुसार स्वचालित रूप से लोड होंगे।</p>
 
     <!-- Row 1 -->
     <div class="row">
-        <div class="col-lg-3 col-md-6">
-            <div class="ad-card" onclick="redirectToAd()">
-                <img src="https://placehold.co/300x250/007BFF/FFFFFF?text=Ad+Slot+1" alt="Advertisement">
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="ad-card" onclick="redirectToAd()">
-                <img src="https://placehold.co/300x250/007BFF/FFFFFF?text=Ad+Slot+2" alt="Advertisement">
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="ad-card" onclick="redirectToAd()">
-                <img src="https://placehold.co/300x250/007BFF/FFFFFF?text=Ad+Slot+3" alt="Advertisement">
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="ad-card" onclick="redirectToAd()">
-                <img src="https://placehold.co/300x250/007BFF/FFFFFF?text=Ad+Slot+4" alt="Advertisement">
-            </div>
-        </div>
+        <div class="col-lg-3 col-md-6"><div class="ad-card" id="ad-slot-1"></div></div>
+        <div class="col-lg-3 col-md-6"><div class="ad-card" id="ad-slot-2"></div></div>
+        <div class="col-lg-3 col-md-6"><div class="ad-card" id="ad-slot-3"></div></div>
+        <div class="col-lg-3 col-md-6"><div class="ad-card" id="ad-slot-4"></div></div>
     </div>
 
     <!-- Row 2 -->
     <div class="row">
-        <div class="col-lg-3 col-md-6">
-            <div class="ad-card" onclick="redirectToAd()">
-                <img src="https://placehold.co/300x250/007BFF/FFFFFF?text=Ad+Slot+5" alt="Advertisement">
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="ad-card" onclick="redirectToAd()">
-                <img src="https://placehold.co/300x250/007BFF/FFFFFF?text=Ad+Slot+6" alt="Advertisement">
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="ad-card" onclick="redirectToAd()">
-                <img src="https://placehold.co/300x250/007BFF/FFFFFF?text=Ad+Slot+7" alt="Advertisement">
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="ad-card" onclick="redirectToAd()">
-                <img src="https://placehold.co/300x250/007BFF/FFFFFF?text=Ad+Slot+8" alt="Advertisement">
-            </div>
-        </div>
+        <div class="col-lg-3 col-md-6"><div class="ad-card" id="ad-slot-5"></div></div>
+        <div class="col-lg-3 col-md-6"><div class="ad-card" id="ad-slot-6"></div></div>
+        <div class="col-lg-3 col-md-6"><div class="ad-card" id="ad-slot-7"></div></div>
+        <div class="col-lg-3 col-md-6"><div class="ad-card" id="ad-slot-8"></div></div>
     </div>
 </div>
 
-<!-- JavaScript to handle Geo-Targeting -->
+<!-- JavaScript to handle Geo-Targeting and Auto-Display -->
 <script>
     // Step 1: यहाँ अपने देश-विशिष्ट विज्ञापन लिंक्स डालें
     const adUrls = {
@@ -88,26 +58,44 @@
         'default': 'https://shorturl.at/W1dCs'  // अगर ऊपर कोई देश मैच नहीं होता, तो यह डिफ़ॉल्ट लिंक खुलेगा
     };
 
-    // यह फ़ंक्शन उपयोगकर्ता को सही विज्ञापन पर रीडायरेक्ट करेगा
-    async function redirectToAd() {
+    // यह फ़ंक्शन पेज लोड होते ही विज्ञापनों को लोड करेगा
+    async function loadAds() {
+        let finalUrl;
         try {
             // हम एक मुफ्त API का उपयोग करके उपयोगकर्ता का देश पता कर रहे हैं
             const response = await fetch('https://ip-api.com/json/?fields=countryCode');
             const data = await response.json();
-            const countryCode = data.countryCode; // जैसे 'US', 'IN', 'GB'
+            const countryCode = data.countryCode;
 
             // तय करें कि कौन सा URL उपयोग करना है
-            const finalUrl = adUrls[countryCode] || adUrls['default'];
+            finalUrl = adUrls[countryCode] || adUrls['default'];
 
-            // विज्ञापन को एक नए टैब में खोलें
-            window.open(finalUrl, '_blank');
-            
         } catch (error) {
-            console.error('Could not fetch country info, redirecting to default ad:', error);
-            // अगर कोई एरर आता है, तो भी डिफ़ॉल्ट विज्ञापन खोलें
-            window.open(adUrls['default'], '_blank');
+            console.error('Could not fetch country info, using default ad URL:', error);
+            // अगर कोई एरर आता है, तो भी डिफ़ॉल्ट विज्ञापन URL का उपयोग करें
+            finalUrl = adUrls['default'];
+        }
+
+        // सभी विज्ञापन स्लॉट्स में iframe लोड करें
+        for (let i = 1; i <= 8; i++) {
+            const adSlot = document.getElementById(`ad-slot-${i}`);
+            if (adSlot) {
+                // एक iframe एलिमेंट बनाएं
+                const iframe = document.createElement('iframe');
+                iframe.src = finalUrl;
+                iframe.width = "300";
+                iframe.height = "250";
+                iframe.scrolling = "no";
+                
+                // स्लॉट के अंदर iframe डालें
+                adSlot.innerHTML = ''; // पहले से मौजूद कुछ भी हो तो साफ़ करें
+                adSlot.appendChild(iframe);
+            }
         }
     }
+
+    // जब पेज पूरी तरह से लोड हो जाए, तो विज्ञापनों को लोड करें
+    document.addEventListener('DOMContentLoaded', loadAds);
 </script>
 
 <!-- Bootstrap JS Bundle with Popper -->
